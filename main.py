@@ -1,6 +1,13 @@
 from experta import Fact, Rule, KnowledgeEngine, AND, OR, NOT
+import os
 
 # defined symptom list
+SYMPTOMSS = [
+    "gorączka",
+    "ból głowy",
+    "ból mięśni",
+]
+
 SYMPTOMS = [
     "gorączka",
     "ból głowy",
@@ -88,7 +95,7 @@ class DiagnosisEngine(KnowledgeEngine):
         )
     )
     def diagnoza_grypa(self):
-        self.declare(Disease(name="grypa"))
+        self.declare(Disease(name="Grypę"))
 
     @Rule(
         AND(
@@ -103,7 +110,7 @@ class DiagnosisEngine(KnowledgeEngine):
         )
     )
     def diagnoza_zapalenie_pluc(self):
-        self.declare(Disease(name="zapalenie płuc"))
+        self.declare(Disease(name="Zapalenie płuc"))
 
     @Rule(
         AND(
@@ -119,12 +126,12 @@ class DiagnosisEngine(KnowledgeEngine):
         )
     )
     def diagnoza_cukrzyca(self):
-        self.declare(Disease(name="cukrzyca"))
+        self.declare(Disease(name="Cukrzyce"))
 
     @Rule(
         AND(
             Symptom(name="podwyższone ciśnienie"),
-            OR(Symptom(name="ból_głowy"), NOT(Symptom(name="ból_głowy"))),
+            OR(Symptom(name="ból głowy"), NOT(Symptom(name="ból_głowy"))),
             OR(Symptom(name="duszności"), NOT(Symptom(name="duszności"))),
             OR(Symptom(name="zawroty głowy"), NOT(Symptom(name="zawroty głowy"))),
             OR(
@@ -138,7 +145,7 @@ class DiagnosisEngine(KnowledgeEngine):
         )
     )
     def diagnoza_nadcisnienie(self):
-        self.declare(Disease(name="nadciśnienie tętnicze"))
+        self.declare(Disease(name="Nadciśnienie tętnicze"))
 
     @Rule(
         AND(
@@ -153,7 +160,7 @@ class DiagnosisEngine(KnowledgeEngine):
         )
     )
     def diagnoza_choroba_wiencowa(self):
-        self.declare(Disease(name="choroba wieńcowa"))
+        self.declare(Disease(name="Chorobę wieńcową"))
 
     @Rule(
         AND(
@@ -167,7 +174,7 @@ class DiagnosisEngine(KnowledgeEngine):
         )
     )
     def diagnoza_astma(self):
-        self.declare(Disease(name="astma"))
+        self.declare(Disease(name="Astmę"))
 
     @Rule(
         AND(
@@ -180,7 +187,7 @@ class DiagnosisEngine(KnowledgeEngine):
         )
     )
     def diagnoza_osteoporoza(self):
-        self.declare(Disease(name="osteoporoza"))
+        self.declare(Disease(name="Osteoporozę"))
 
     @Rule(
         AND(
@@ -191,7 +198,7 @@ class DiagnosisEngine(KnowledgeEngine):
         )
     )
     def diagnoza_zapalenie_stawow(self):
-        self.declare(Disease(name="reumatoidalne zapalenie stawów"))
+        self.declare(Disease(name="Reumatoidalne zapalenie stawów"))
 
     @Rule(
         AND(
@@ -202,7 +209,7 @@ class DiagnosisEngine(KnowledgeEngine):
         )
     )
     def diagnoza_migrena(self):
-        self.declare(Disease(name="migrena"))
+        self.declare(Disease(name="Migrenę"))
 
     @Rule(
         AND(
@@ -214,43 +221,71 @@ class DiagnosisEngine(KnowledgeEngine):
         )
     )
     def diagnoza_rak_pluc(self):
-        self.declare(Disease(name="rak płuc"))
+        self.declare(Disease(name="Raka płuc"))
 
 
-# Create an instance of the DiagnosisEngine class
-engine = DiagnosisEngine()
+while True:
+    # Create an instance of the DiagnosisEngine class
+    engine = DiagnosisEngine()
 
-# Reset the instance of the DiagnosisEngine class
-engine.reset()
+    # Reset the instance of the DiagnosisEngine class
+    engine.reset()
 
+    print(
+        f"\nCześć, jestem Twoim wirutalnym asystentem i na podstawie podanych przez Ciebie objawów postaram się określić na jaką chorobę cierpisz.\n\nOdpowiedz proszę na następujące pytania:\n"
+    )
 
-print(
-    f"Cześć, jestem Twoim wirutalnym asystentem i na podstawie podanych przez Ciebie objawów postaram się określić na jaką chorobę cierpisz"
-)
-
-
-# Iterate through each symptom in the SYMPTOMS list
-for item in SYMPTOMS:
-    # Prompt the user for a confirmation on whether they are experiencing the current symptom
-    while True:
-        confirmed_symptom = input(
-            f"Czy występuje/ą u Cibie takie objawy jak {item}? (TAK / NIE): "
-        )
-        # If the user confirms that they are or are not experiencing the symptom, declare it in the DiagnosisEngine
-        if confirmed_symptom.lower() in ["tak", "nie"]:
-            engine.declare(
-                Symptom(name=item),
+    # Iterate through each symptom in the SYMPTOMS list
+    for item in SYMPTOMS:
+        # Keep looping until the user answers with "TAK" or "NIE"
+        while True:
+            confirmed_symptom = input(
+                f"Czy występuje/ą u Ciebie takie objawy jak {item}? (TAK / NIE): "
             )
-            break
-        # If the user inputs an invalid response, prompt them to try again
-        else:
-            print(f"Wprowadzono nie poprawną odpowiedź! Wpisz TAK lub NIE.")
+            # If user answers "TAK", declare the symptom using the Declare function of the engine.
+            if confirmed_symptom.lower() == "tak":
+                engine.declare(
+                    Symptom(name=item),
+                )
+                break
+            # If user answers "NIE", exit the loop for the current symptom
+            elif confirmed_symptom.lower() == "nie":
+                break
+            # If user answers anything else, prompt them to enter a valid response
+            else:
+                print(f"Wprowadzono nie poprawną odpowiedź! Wpisz TAK lub NIE.")
 
-engine.run()
+    engine.run()
 
+    # Loop overa ll facts in the engine and appends any diagnosed diseases to a list.
+    diagnosed_diseases = []
+    for disease in engine.facts.values():
+        if isinstance(disease, Disease):
+            diagnosed_diseases.append(disease["name"])
 
-for disease in engine.facts.values():
-    if isinstance(disease, Disease):
-        print(f"Diagnoza: {disease['name']}")
+    # Check if any disease has been confirmed and print diagnosis
+    if diagnosed_diseases:
+        print(
+            f"\nNa bazie informacji które posiadam, wprowadzone przez Ciebie objawy mogą oznaczać że cierpisz na:"
+        )
+        for item in diagnosed_diseases:
+            print(f"- {item}")
+        print(
+            f"\nPamiętaj, że nie znam Twojej historii medycznej oraz nie mogłem przeprowadzić badania osobiście. Aby potwierdzić diagnozę skontaktuj się z Twoim lekarzem."
+        )
+    else:
+        print(
+            f"\nZgodnie z informajami które posiadam, Twoje objawy nie stwierdzją żadnej ze znanych mi chorób. W celu dokładniejszej diagnozy skontaktuj się z Twoim lekarzem."
+        )
 
-print("")
+    # Ask the user if they want to use the system again
+    retry = input(f"\nCzy chcesz użyć systemu raz jeszcze? (Wpiz TAK): ")
+
+    # If the user wants to retry, clear the console and continue with the loop
+    if retry.lower() == "tak":
+        cls = lambda: os.system("cls")
+        cls()
+        continue
+    # If the user does not want to retry, end program
+    else:
+        break
