@@ -1,13 +1,7 @@
 from experta import Fact, Rule, KnowledgeEngine, AND, OR, NOT
 import os
 
-# defined symptom list
-SYMPTOMSS = [
-    "gorączka",
-    "ból głowy",
-    "ból mięśni",
-]
-
+# Defined symptom list
 SYMPTOMS = [
     "gorączka",
     "ból głowy",
@@ -76,9 +70,6 @@ class DiagnosisEngine(KnowledgeEngine):
     the presented symptoms.
 
     This class inherits from the KnowledgeEngine class and contains multiple rules for different diseases.
-
-    Attributes:
-    None
 
     Methods:
     Multiple methods containing inference rules for diagnosing different diseases.
@@ -257,7 +248,7 @@ while True:
 
     engine.run()
 
-    # Loop overa ll facts in the engine and appends any diagnosed diseases to a list.
+    # Loop over all facts in the engine and appends any diagnosed diseases to a list.
     diagnosed_diseases = []
     for disease in engine.facts.values():
         if isinstance(disease, Disease):
