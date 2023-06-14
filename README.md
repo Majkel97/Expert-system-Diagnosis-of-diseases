@@ -45,25 +45,25 @@ Projekt ten to system ekspertowy umożliwiający rozpoznanie choroby na bazie od
 
 Aplikacja ukazuje powitalne zdanie, które określa, do czego została stworzona i w jaki sposób będzie odbywał się proces zbierania informacji.
 
-<img src=""  width="200px" height="400px">
+<img src="https://github.com/Majkel97/Expert-system-Diagnosis-of-diseases/blob/main/img/docs/zobrazowanie_1.png?raw=true"  width="700px" height="auto">
 
 2. Widok zbierania informacji od użytkownika z walidacją wprowadzanych danych.
 
 Aplikacja iteruje po wszystkich zdefiniowanych symptomach i zbiera odpowiedzi od użytkownika. Pacjent może wprowadzić tylko odpowiedzi "**tak**" lub "**nie**" (bez znaczenia, jaką zastosuje wielkość znaków). W przypadku wprowadzenia błędnej odpowiedzi, program poprosi użytkownika o podanie poprawnej.
 
-<img src=""  width="200px" height="400px">
+<img src="https://github.com/Majkel97/Expert-system-Diagnosis-of-diseases/blob/main/img/docs/zobrazowanie_2.png?raw=true"  width="700px" height="auto">
 
 3. Widok zdiagnozowanej choroby / chorób po dokonaniu analizy wprowadzanych danych.
 
 Po przeanalizowaniu wszystkich odpowiedzi, jeżeli system rozpozna jakąś chorobę, jej nazwa zostanie wyświetlona na ekranie. Ponadto zostanie przedstawiony komunikat, że program nie jest idealny i wszystkie zdiagnozowane choroby należy skonsultować z realnym lekarze. Na koniec wyświetlane jest pytanie, czy osoba chce użyć programu raz jeszcze.
 
-<img src=""  width="200px" height="400px">
+<img src="https://github.com/Majkel97/Expert-system-Diagnosis-of-diseases/blob/main/img/docs/zobrazowanie_3.png?raw=true"  width="700px" height="auto">
 
 4. Widok z informacją o braku rozpoznania choroby po dokonaniu analizy wprowadzanych danych.
 
 Po przeanalizowaniu wszystkich odpowiedzi, jeżeli system nie rozpozna żadnej choroby, zostanie wyświetlony komunikat przedstawiony na poniższym zdjęciu. Ponadto wyświetlane jest pytanie, czy osoba chce użyć programu raz jeszcze.
 
-<img src=""  width="200px" height="400px">
+<img src="https://github.com/Majkel97/Expert-system-Diagnosis-of-diseases/blob/main/img/docs/zobrazowanie_4.png?raw=true"  width="700px" height="auto">
 
 ## Podsumowanie
 
