@@ -1,7 +1,5 @@
 # System ekspercki do rozpoznawania chorób
 
-Sprawozdanie i dokumentacja zostało napisane przy użyciu języka znaczników Markdown, a następnie zostało zapisane do formatu PDF. Zachęcam do weryfikacji pracy [na moim profilu GitHub](https://github.com/Majkel97/Expert-system-Diagnosis-of-diseases), gdyż jest tam nieco bardziej przejrzysta forma tego dokumentu. Jeżeli wymaga Pan sprawozdania napisanego w Wordzie (lub podobnym narzędziu), bardzo proszę o informację i na pewno takie sporządzę.
-
 ## Spis treści
 
 1. [Wprowadzenie](#wprowadzenie)
